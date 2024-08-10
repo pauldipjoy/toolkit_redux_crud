@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import BookFormCreate from "./components/BookFormCreate";
+import BookList from "./components/BookList";
 
-function App() {
+const App = () => {
+  const [bookToEdit, setBookToEdit] = useState(null);
+  const handleEdit = (book) => {
+    setBookToEdit(book);
+  };
+
+  const handleRemoveEdit = (book) => {
+    setBookToEdit(null);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BookFormCreate bookToEdit={bookToEdit} handleRemove={handleRemoveEdit} />
+      <BookList onHandleEdit={handleEdit} />
     </div>
   );
-}
+};
 
 export default App;
